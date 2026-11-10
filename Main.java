@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 
 public class Main {
@@ -7,26 +8,29 @@ public class Main {
         System.out.print("Ingrese el nombre del estudiante: ");
         String nombre = sc.nextLine();
 
-        System.out.print("Ingrese la primera nota: ");
-        double nota1 = sc.nextDouble();
+        double[] notas = new double[3];
+        double suma = 0;
 
-        System.out.print("Ingrese la segunda nota: ");
-        double nota2 = sc.nextDouble();
+        for (int i = 0; i < 3; i++) {
+            do {
+                System.out.print("Ingrese la nota " + (i + 1) + " (0-20): ");
+                notas[i] = sc.nextDouble();
 
-        System.out.print("Ingrese la tercera nota: ");
-        double nota3 = sc.nextDouble();
+                if (notas[i] < 0 || notas[i] > 20) {
+                    System.out.println("Nota inválida. Intente nuevamente.");
+                }
+            } while (notas[i] < 0 || notas[i] > 20);
 
-        double promedio = (nota1 + nota2 + nota3) / 3;
+            suma += notas[i];
+        }
 
-        System.out.println("\n--- RESULTADOS ---");
+        double promedio = suma / 3;
+        String estado = promedio >= 11 ? "APROBADO" : "DESAPROBADO";
+
+        System.out.println("\n--- RESULTADO ---");
         System.out.println("Estudiante: " + nombre);
         System.out.printf("Promedio: %.2f%n", promedio);
-
-        if (promedio >= 11) {
-            System.out.println("Estado: APROBADO");
-        } else {
-            System.out.println("Estado: DESAPROBADO");
-        }
+        System.out.println("Estado: " + estado);
 
         sc.close();
     }
